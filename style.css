@@ -1,1 +1,8 @@
-body{font-family:Arial;background:#222;color:#fff;margin:0;padding:20px}header{background:#c62828;padding:15px;border-radius:10px;text-align:center}input{width:100%;padding:10px;margin:15px 0}.card{background:#333;padding:15px;border-radius:10px;margin:10px 0}button{background:#ffb300;border:none;padding:8px 14px;border-radius:8px;cursor:pointer}
+body{margin:0;background:#1f1f1f;color:#fff;font-family:Arial}
+header{background:#c62828;padding:16px;text-align:center}
+.container{display:flex;min-height:100vh}
+aside{width:240px;background:#2c2c2c;padding:15px}
+aside button{display:block;width:100%;margin:8px 0;padding:12px;border:none;border-radius:8px;background:#444;color:#fff}
+main{flex:1;padding:20px}
+input{width:100%;padding:12px;border-radius:8px;border:none}
+.card{background:#333;padding:16px;border-radius:10px;margin-top:16px}
