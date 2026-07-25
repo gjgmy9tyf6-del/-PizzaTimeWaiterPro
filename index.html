@@ -1,33 +1,275 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pizza Time Waiter Pro</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Time Waiter Pro - فرع نابلس</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><h1>🍕 Pizza Time Waiter Pro</h1></header>
-<div class="container">
-<aside>
-<h2>الأقسام</h2>
-<button>🍕 Pizza</button>
-<button>🍔 Burgers</button>
-<button>🍝 Pasta</button>
-<button>🥗 Salads</button>
-<button>🍟 Appetizers</button>
-<button>🥤 Drinks</button>
-<button>🍰 Desserts</button>
-</aside>
-<main>
-<input placeholder="ابحث عن صنف...">
-<div class="card">
-<h3>مرحباً نادر 👋</h3>
-<p>هذه نسخة v1.1 الأساسية. سنضيف المنيو الكاملة والمكونات والطلبات في التحديثات القادمة.</p>
-</div>
-<div class="card"><h3>🛒 الطلب الحالي</h3><p>لا توجد طلبات.</p></div>
-</main>
-</div>
-<script src="script.js"></script>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo">🍕 Pizza Time <span>Waiter Pro</span></div>
+    <div class="user-info">أهلاً نادر | فرع نابلس</div>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="ابحث عن صنف...">
+  </div>
+
+  <!-- Main Container -->
+  <main id="mainContainer">
+    <!-- Dynamic content injected by JS -->
+  </main>
+
+  <!-- Embedded Menu Data -->
+  <script>
+    const MENU = [
+      // --- بيتزا ---
+      {
+        id:1, name:"مارغريتا", category:"بيتزا", description:"بيتزا كلاسيكية بجبنة الموزاريلا وصلصة الطماطم والريحان",
+        ingredients:["عجينة بيتزا","صلصة طماطم","جبنة موزاريلا","ريحان"],
+        removableIngredients:["ريحان"],
+        extras:["Extra Cheese","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Margherita",
+        serving:"تقدم ساخنة مع رشة جبنة إضافية",
+        suggestions:["Pepsi","Garlic Bread"]
+      },
+      {
+        id:2, name:"بيبروني", category:"بيتزا", description:"شرائح البيبروني مع جبنة الموزاريلا الذائبة",
+        ingredients:["عجينة بيتزا","صلصة طماطم","جبنة موزاريلا","بيبروني"],
+        removableIngredients:["بيبروني"],
+        extras:["Extra Cheese","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Pepperoni",
+        serving:"تقدم ساخنة، يمكن إضافة رشة فلفل أحمر",
+        suggestions:["7up","Fries"]
+      },
+      {
+        id:3, name:"خضار", category:"بيتزا", description:"تشكيلة خضار طازجة مع جبنة الموزاريلا",
+        ingredients:["عجينة بيتزا","صلصة طماطم","جبنة موزاريلا","فلفل رومي","بصل","مشروم","زيتون"],
+        removableIngredients:["بصل","مشروم","زيتون"],
+        extras:["Extra Cheese","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Veggie",
+        serving:"تقدم مع صوص الرانش اختياري",
+        suggestions:["Pepsi","Garlic Bread"]
+      },
+
+      // --- بيتزا فاخرة ---
+      {
+        id:4, name:"تشيكن رانش", category:"بيتزا فاخرة", description:"دجاج متبل، صوص رانش، جبنة موزاريلا",
+        ingredients:["عجينة بيتزا","صوص رانش","جبنة موزاريلا","دجاج متبل","بصل","فلفل رومي"],
+        removableIngredients:["بصل","فلفل رومي"],
+        extras:["Extra Chicken","Extra Cheese","Extra Ranch"],
+        image:"https://via.placeholder.com/300x200?text=Chicken+Ranch",
+        serving:"يقدم مع صوص رانش جانبي",
+        suggestions:["Pepsi","Garlic Bread","Fries"]
+      },
+      {
+        id:5, name:"بيتزا لحم بالباربكيو", category:"بيتزا فاخرة", description:"لحم مفروم متبل بصوص الباربكيو مع البصل والجبنة",
+        ingredients:["عجينة بيتزا","صوص باربكيو","جبنة موزاريلا","لحم مفروم","بصل"],
+        removableIngredients:["بصل"],
+        extras:["Extra Beef","Extra Cheese"],
+        image:"https://via.placeholder.com/300x200?text=BBQ+Beef",
+        serving:"تقدم ساخنة مع القليل من صوص الباربكيو على الوجه",
+        suggestions:["Pepsi","Coleslaw"]
+      },
+
+      // --- بيتزا بالكريمة ---
+      {
+        id:6, name:"بيتزا كريمية بالمشروم", category:"بيتزا بالكريمة", description:"صوص كريمة بديل الطماطم مع مشروم طازج وجبنة",
+        ingredients:["عجينة بيتزا","صوص كريمة","جبنة موزاريلا","مشروم","بصل"],
+        removableIngredients:["بصل","مشروم"],
+        extras:["Extra Cheese","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Creamy+Mushroom",
+        serving:"تقدم مع رشة بقدونس",
+        suggestions:["Water","Fresh Salad"]
+      },
+
+      // --- برجر ---
+      {
+        id:7, name:"برجر لحم كلاسيكي", category:"برجر", description:"قطعة لحم 150غ، جبنة، خس، طماطم، بصل",
+        ingredients:["خبز برجر","قرص لحم","جبنة شيدر","خس","طماطم","بصل","صوص خاص"],
+        removableIngredients:["بصل","طماطم"],
+        extras:["Extra Beef Patty","Extra Cheese"],
+        image:"https://via.placeholder.com/300x200?text=Classic+Burger",
+        serving:"يقدم مع بطاطا مقلية وصوص كاتشب",
+        suggestions:["Pepsi","Onion Rings"]
+      },
+      {
+        id:8, name:"بيتزا برجر", category:"برجر", description:"خبز برجر محشو بجبنة الموزاريلا واللحم المفروم وصوص البيتزا",
+        ingredients:["خبز برجر","لحم مفروم","جبنة موزاريلا","صلصة طماطم","بصل","فلفل رومي"],
+        removableIngredients:["بصل","فلفل رومي"],
+        extras:["Extra Beef","Extra Cheese"],
+        image:"https://via.placeholder.com/300x200?text=Pizza+Burger",
+        serving:"يقدم مع بطاطا ودجز",
+        suggestions:["7up","Garlic Bread"]
+      },
+
+      // --- باستا ---
+      {
+        id:9, name:"باستا ألفريدو", category:"باستا", description:"باستا فيتوتشيني مع صوص كريمة ألفريدو والدجاج",
+        ingredients:["فيتوتشيني","صوص كريمة","جبنة بارميزان","دجاج مشوي","بازيلاء","مشروم"],
+        removableIngredients:["بازيلاء","مشروم"],
+        extras:["Extra Chicken","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Alfredo",
+        serving:"تقدم ساخنة مع خبز الثوم",
+        suggestions:["Garlic Bread","Pepsi"]
+      },
+      {
+        id:10, name:"باستا بولونيز", category:"باستا", description:"باستا اسباغيتي مع صوص اللحم المفروم والطماطم",
+        ingredients:["اسباغيتي","لحم مفروم","صلصة طماطم","بصل","جزر","كرفس"],
+        removableIngredients:["بصل"],
+        extras:["Extra Beef","Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Bolognese",
+        serving:"ترش بجبنة بارميزان إضافية",
+        suggestions:["Garlic Bread","Salad"]
+      },
+
+      // --- سلطات ---
+      {
+        id:11, name:"سلطة سيزر", category:"سلطات", description:"خس رومين، خبز محمص، جبنة بارميزان، صوص سيزر",
+        ingredients:["خس","خبز محمص","جبنة بارميزان","صوص سيزر","دجاج مشوي"],
+        removableIngredients:["دجاج مشوي"],
+        extras:["Extra Chicken","Extra Dressing"],
+        image:"https://via.placeholder.com/300x200?text=Caesar",
+        serving:"تقدم مع قطع دجاج إضافية حسب الطلب",
+        suggestions:["Water","Garlic Bread"]
+      },
+      {
+        id:12, name:"سلطة يونانية", category:"سلطات", description:"طماطم، خيار، زيتون، جبنة فيتا، زيت زيتون",
+        ingredients:["طماطم","خيار","زيتون كالاماتا","جبنة فيتا","بصل أحمر","زيت زيتون"],
+        removableIngredients:["بصل أحمر"],
+        extras:["Extra Feta"],
+        image:"https://via.placeholder.com/300x200?text=Greek+Salad",
+        serving:"تقدم باردة مع خبز عربي",
+        suggestions:["Water","Soup"]
+      },
+
+      // --- مقبلات ---
+      {
+        id:13, name:"أصابع جبنة الموزاريلا", category:"مقبلات", description:"أصابع جبنة موزاريلا مقلية، تقدم مع صوص مارينارا",
+        ingredients:["جبنة موزاريلا","بقسماط","بيض","زيت للقلي","صوص مارينارا"],
+        removableIngredients:[],
+        extras:["Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Mozzarella+Sticks",
+        serving:"تقدم فوراً ساخنة مع الصوص",
+        suggestions:["Pepsi","Fries"]
+      },
+      {
+        id:14, name:"ثومية (خبز الثوم)", category:"مقبلات", description:"خبز باغيت مدهون بزبدة الثوم والبقدونس",
+        ingredients:["خبز باغيت","زبدة","ثوم","بقدونس"],
+        removableIngredients:[],
+        extras:["Extra Garlic"],
+        image:"https://via.placeholder.com/300x200?text=Garlic+Bread",
+        serving:"تقدم مع صوص رانش أو كاتشب",
+        suggestions:["Any Soup","Pasta"]
+      },
+      {
+        id:15, name:"بطاطا مقلية", category:"مقبلات", description:"بطاطا مقلية ذهبية مع رشة ملح وبهارات",
+        ingredients:["بطاطا","زيت","ملح","بهارات بابريكا"],
+        removableIngredients:[],
+        extras:["Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Fries",
+        serving:"تقدم مع كاتشب ومايونيز",
+        suggestions:["Burger","Pepsi"]
+      },
+
+      // --- ساندويشات ---
+      {
+        id:16, name:"ساندويش دجاج", category:"ساندويشات", description:"خبز باغيت، دجاج مشوي، خس، طماطم، صوص مايونيز",
+        ingredients:["خبز باغيت","دجاج مشوي","خس","طماطم","مايونيز"],
+        removableIngredients:["طماطم"],
+        extras:["Extra Chicken"],
+        image:"https://via.placeholder.com/300x200?text=Chicken+Sub",
+        serving:"يقدم مع بطاطا مقلية",
+        suggestions:["7up","Fries"]
+      },
+      {
+        id:17, name:"ساندويش ستيك", category:"ساندويشات", description:"قطع لحم ستيك مع بصل وفلفل في خبز تورتيلا",
+        ingredients:["تورتيلا","ستيك","بصل","فلفل رومي","جبنة شيدر"],
+        removableIngredients:["بصل"],
+        extras:["Extra Beef"],
+        image:"https://via.placeholder.com/300x200?text=Steak+Sandwich",
+        serving:"يقدم ساخنًا مع صوص باربكيو جانبي",
+        suggestions:["Pepsi","Coleslaw"]
+      },
+
+      // --- كالزوني ---
+      {
+        id:18, name:"كالزوني جبنة وبيبروني", category:"كالزوني", description:"عجينة بيتزا مطوية محشوة بجبنة موزاريلا وبيبروني",
+        ingredients:["عجينة بيتزا","جبنة موزاريلا","بيبروني","صلصة طماطم"],
+        removableIngredients:["بيبروني"],
+        extras:["Extra Cheese"],
+        image:"https://via.placeholder.com/300x200?text=Calzone",
+        serving:"يقدم مع صوص مارينارا للتغميس",
+        suggestions:["Soup","Salad"]
+      },
+
+      // --- مشروبات ---
+      {
+        id:19, name:"بيبسي", category:"مشروبات", description:"بيبسي 330 مل",
+        ingredients:[], removableIngredients:[], extras:[],
+        image:"https://via.placeholder.com/300x200?text=Pepsi",
+        serving:"يقدم بارداً مع مكعبات ثلج",
+        suggestions:[]
+      },
+      {
+        id:20, name:"سفن أب", category:"مشروبات", description:"سفن أب 330 مل",
+        ingredients:[], removableIngredients:[], extras:[],
+        image:"https://via.placeholder.com/300x200?text=7up",
+        serving:"يقدم بارداً",
+        suggestions:[]
+      },
+      {
+        id:21, name:"مياه معدنية", category:"مشروبات", description:"قنينة مياه 500 مل",
+        ingredients:[], removableIngredients:[], extras:[],
+        image:"https://via.placeholder.com/300x200?text=Water",
+        serving:"تقدم باردة",
+        suggestions:[]
+      },
+
+      // --- حلويات ---
+      {
+        id:22, name:"تشيز كيك", category:"حلويات", description:"تشيز كيك كريمي مع صوص الفراولة",
+        ingredients:["جبنة كريمية","بسكويت","زبدة","سكر","صوص فراولة"],
+        removableIngredients:[],
+        extras:["Extra Topping"],
+        image:"https://via.placeholder.com/300x200?text=Cheesecake",
+        serving:"تقدم باردة",
+        suggestions:["Coffee","Water"]
+      },
+      {
+        id:23, name:"كيكة الشوكولاتة", category:"حلويات", description:"كيكة شوكولاتة غنية بصوص الشوكولاتة",
+        ingredients:["شوكولاتة","دقيق","بيض","سكر","زبدة"],
+        removableIngredients:[],
+        extras:["Extra Sauce"],
+        image:"https://via.placeholder.com/300x200?text=Chocolate+Cake",
+        serving:"تقدم دافئة مع كرة آيس كريم",
+        suggestions:["Milk","Coffee"]
+      },
+
+      // --- وجبات أطفال ---
+      {
+        id:24, name:"وجبة دجاج مقرمش", category:"وجبات أطفال", description:"قطع دجاج مقرمش مع بطاطا مقلية وعصير",
+        ingredients:["قطع دجاج","بطاطا مقلية","عصير تفاح"],
+        removableIngredients:[],
+        extras:["Extra Fries"],
+        image:"https://via.placeholder.com/300x200?text=Kids+Chicken",
+        serving:"تقدم في صندوق أطفال مع لعبة صغيرة",
+        suggestions:[]
+      },
+      {
+        id:25, name:"بيتزا صغيرة", category:"وجبات أطفال", description:"بيتزا صغيرة بجبنة الموزاريلا",
+        ingredients:["عجينة بيتزا","صلصة طماطم","جبنة موزاريلا"],
+        removableIngredients:[],
+        extras:["Extra Cheese"],
+        image:"https://via.placeholder.com/300x200?text=Kids+Pizza",
+        serving:"مقطعة 4 قطع",
+        suggestions:["Juice"]
+      }
+    ];
+  </script>
+  <script src="app.js"></script>
 </body>
 </html>
