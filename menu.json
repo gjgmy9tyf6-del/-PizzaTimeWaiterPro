@@ -1,1 +1,7 @@
-{"categories":[]}
+{"categories":[]}{
+  "tool": "web_fetch",
+  "arguments": {
+    "url": "https://pizzatime.ps/digital-menu/",
+    "fetchInfo": "استخرج كل أصناف المنيو من جميع الأقسام: الأسماء، التصنيفات، الوصف، والمكونات لجميع الأصناف في قائمة مطعم Pizza Time فلسطين."
+  }
+}
