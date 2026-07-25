@@ -269,7 +269,7 @@
         suggestions:["Juice"]
       }
     ];
-  </script>
-  <script src="app.js"></script>
+</script>
+<script src="script.js"></script>
 </body>
 </html>
